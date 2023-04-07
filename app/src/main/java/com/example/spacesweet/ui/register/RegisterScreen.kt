@@ -202,12 +202,10 @@ fun RegisterButton(navController: NavHostController) {
             .height(48.dp),
         colors = ButtonDefaults.buttonColors(
             backgroundColor = Color(0xFF0074B6),
-            disabledBackgroundColor = Color(0xFF77A5C7),
             contentColor = Color.White,
-            disabledContentColor = Color.White
         ),
     ) {
-        Text(text = "Iniciar Sesión")
+        Text(text = "Regístrate")
     }
 }
 

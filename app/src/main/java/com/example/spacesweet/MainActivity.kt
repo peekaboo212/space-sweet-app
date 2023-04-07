@@ -17,6 +17,7 @@ import com.example.spacesweet.ui.theme.SpaceSweetTheme
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.spacesweet.ui.navigation.BottomNavigation
 import com.example.spacesweet.ui.register.RegisterScreen
 import com.example.spacesweet.ui.welcome.WelcomeScreen
 
@@ -25,7 +26,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SpaceSweetTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
@@ -65,6 +65,7 @@ class MainActivity : ComponentActivity() {
                         composable("login") { LoginScreen(LoginViewModel(), navController) }
                         composable("register") {RegisterScreen(navController)}
                         composable("welcome") { WelcomeScreen(navController)}
+                        composable("bottomNavigate"){ BottomNavigation()}
                     }
                 }
             }

@@ -134,7 +134,7 @@ fun RegisterButton(modifier: Modifier, navController: NavHostController) {
         onClick = { navController.navigate("register") },
 
     ) {
-        Text("Registrate")
+        Text("Regístrate")
     }
 }
 
