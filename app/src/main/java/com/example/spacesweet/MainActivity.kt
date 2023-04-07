@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     val navController = rememberNavController()
-                    NavHost(navController = navController, startDestination = "onboarding1") {
+                    NavHost(navController = navController, startDestination = "login") {
                         composable("onboarding1") {
                             Onboard(
                                 navController,
