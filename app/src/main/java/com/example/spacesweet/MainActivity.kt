@@ -17,6 +17,8 @@ import com.example.spacesweet.ui.theme.SpaceSweetTheme
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.spacesweet.ui.register.RegisterScreen
+import com.example.spacesweet.ui.welcome.WelcomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,7 +62,9 @@ class MainActivity : ComponentActivity() {
                                 buttonTitle = "Get Start",
                             )
                         }
-                        composable("login") { LoginScreen(LoginViewModel()) }
+                        composable("login") { LoginScreen(LoginViewModel(), navController) }
+                        composable("register") {RegisterScreen(navController)}
+                        composable("welcome") { WelcomeScreen(navController)}
                     }
                 }
             }

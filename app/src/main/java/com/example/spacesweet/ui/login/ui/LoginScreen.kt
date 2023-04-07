@@ -28,10 +28,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun LoginScreen(viewModel: LoginViewModel) {
+fun LoginScreen(viewModel: LoginViewModel, navController: NavHostController) {
+
     Scaffold {
         Box(
             Modifier.fillMaxSize()
@@ -66,7 +69,7 @@ fun LoginScreen(viewModel: LoginViewModel) {
                         verticalArrangement = Arrangement.Center,
                         modifier = Modifier.fillMaxWidth().padding(3.dp)
                     ) {
-                        Login(viewModel)
+                        Login(viewModel, navController)
                     }
                 }
             }
@@ -76,7 +79,7 @@ fun LoginScreen(viewModel: LoginViewModel) {
 
 
 @Composable
-fun Login(viewModel: LoginViewModel) {
+fun Login(viewModel: LoginViewModel, navController: NavHostController) {
     val email: String by viewModel.email.observeAsState(initial = "")
     val password: String by viewModel.password.observeAsState(initial = "")
     val loginEnable: Boolean by viewModel.loginEnable.observeAsState(initial = false)
@@ -103,12 +106,13 @@ fun Login(viewModel: LoginViewModel) {
                 viewModel.onLoginSelected()
             }
         }
-        RegisterButton(Modifier.align(Alignment.End))
+        RegisterButton(Modifier.align(Alignment.End), navController)
     }
 }
 
 @Composable
 fun LoginButton(loginEnable: Boolean, onLoginSelected: () -> Unit) {
+
     Button(
         onClick = { onLoginSelected() },
         modifier = Modifier
@@ -127,9 +131,9 @@ fun LoginButton(loginEnable: Boolean, onLoginSelected: () -> Unit) {
 }
                                                     
 @Composable
-fun RegisterButton(modifier: Modifier) {
+fun RegisterButton(modifier: Modifier, navController: NavHostController) {
     TextButton(
-        onClick = { /* Do something! */ },
+        onClick = { navController.navigate("register") },
 
     ) {
         Text("Registrate")
