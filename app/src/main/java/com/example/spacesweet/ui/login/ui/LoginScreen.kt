@@ -81,7 +81,7 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavHostController) {
 fun Login(viewModel: LoginViewModel, navController: NavHostController) {
     val email: String by viewModel.email.observeAsState(initial = "")
     val password: String by viewModel.password.observeAsState(initial = "")
-    val loginEnable: Boolean by viewModel.loginEnable.observeAsState(initial = false)
+    val loginEnable: Boolean by viewModel.valid.observeAsState(initial = false)
     val isLoading: Boolean by viewModel.isLoading.observeAsState(initial = false)
 
     val coroutineScope = rememberCoroutineScope()
