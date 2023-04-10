@@ -1,0 +1,47 @@
+[33mcommit bbe050894f2d271e006ddc7883f15a2c2acbacca[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m, [m[1;31morigin/dev[m[33m)[m
+Author: Itzel Ramon <itzelramonf@gmail.com>
+Date:   Sat Apr 8 16:19:10 2023 -0500
+
+    Creacion de data, di y domain
+
+[33mcommit f75c0a4e8d5f1a1299c2eaabdc45dd2084937b1c[m
+Author: Itzel Ramon <itzelramonf@gmail.com>
+Date:   Fri Apr 7 15:46:26 2023 -0500
+
+    Se creó el BottomNavigation
+
+[33mcommit 8cad6a7d6d1b6bfa64de060febc6b49aa68083b1[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Itzel Ramon <itzelramonf@gmail.com>
+Date:   Fri Apr 7 14:18:43 2023 -0500
+
+    Diseño de RegisterScreen
+
+[33mcommit 1dca8d2540ad917db3af83f729c5f665cad9f7be[m
+Author: Itzel Ramon <itzelramonf@gmail.com>
+Date:   Fri Apr 7 13:44:11 2023 -0500
+
+    Diseño de WelcomeScreen
+
+[33mcommit 58091e3e59f6113dc6cfeed9b083c0a29f58365a[m
+Author: Itzel Ramon <itzelramonf@gmail.com>
+Date:   Fri Apr 7 10:26:56 2023 -0500
+
+    Cambio de StartDestination
+
+[33mcommit 85a16b9e9a63dbe31dc9285a0a46586e920c13a1[m
+Author: Itzel Ramon <itzelramonf@gmail.com>
+Date:   Fri Apr 7 10:23:03 2023 -0500
+
+    Diseño del login
+
+[33mcommit 392b74c3b654cadc7eef9838a5c357585b84c102[m
+Author: Itzel Ramon <itzelramonf@gmail.com>
+Date:   Fri Apr 7 08:36:02 2023 -0500
+
+    Creacion de onboarding
+
+[33mcommit 82ea5f64cd607baa2f6927255baa94e1dc0db6ee[m
+Author: peekaboo212 <chavarria.sofia212@gmail.com>
+Date:   Wed Apr 5 19:56:05 2023 -0500
+
+    función básica del login

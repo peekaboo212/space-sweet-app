@@ -6,7 +6,7 @@ import javax.inject.Inject
 class LoginRepository @Inject constructor(private val api:LoginService) {
     //private val api = LoginService()
 
-    suspend fun login(user:String, password: String): String{
-        return api.login(user, password)
+    suspend fun login(email:String, password: String): String{
+        return api.login(email, password)
     }
 }
