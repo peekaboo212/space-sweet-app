@@ -21,7 +21,9 @@ import androidx.navigation.compose.composable
 import com.example.spacesweet.ui.navigation.BottomNavigation
 import com.example.spacesweet.ui.register.RegisterScreen
 import com.example.spacesweet.ui.welcome.WelcomeScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val loginViewModel: LoginViewModel by viewModels()
 
