@@ -4,9 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
-
     <application
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:name=".ApplicationFoodie"
         android:theme="@style/Theme.SpaceSweet"
+
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
