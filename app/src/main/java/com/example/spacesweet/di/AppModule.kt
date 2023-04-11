@@ -18,7 +18,7 @@ class AppModule {
     @Provides // Prepara la clase para ser injectado
     fun provideReftrofit(): Retrofit{
         return Retrofit.Builder()
-            .baseUrl("http://192.168.1.179:8080/api/v1/")
+            .baseUrl("http://192.168.1.179:8080")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
