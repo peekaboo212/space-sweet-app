@@ -102,7 +102,7 @@ fun Login(viewModel: LoginViewModel, navController: NavHostController) {
         PasswordField(password) { viewModel.onLoginChanged(email, it) }
         LoginButton(loginEnable) {
             coroutineScope.launch {
-                viewModel.onLoginSelected()
+                viewModel.onLoginSelected(navController)
             }
         }
         RegisterButton(Modifier.align(Alignment.End), navController)

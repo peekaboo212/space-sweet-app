@@ -18,6 +18,7 @@ import com.example.spacesweet.ui.theme.SpaceSweetTheme
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.spacesweet.ui.home.HomeScreen
 import com.example.spacesweet.ui.navigation.BottomNavigation
 import com.example.spacesweet.ui.register.RegisterScreen
 import com.example.spacesweet.ui.welcome.WelcomeScreen
@@ -70,6 +71,7 @@ class MainActivity : ComponentActivity() {
                         composable("login") { LoginScreen(loginViewModel, navController) }
                         composable("register") {RegisterScreen(navController)}
                         composable("welcome") { WelcomeScreen(navController)}
+                        composable("home") { HomeScreen()}
                         composable("bottomNavigate"){ BottomNavigation()}
                     }
                 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavHostController
 import com.example.spacesweet.domain.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -42,11 +43,13 @@ class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase)
         Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
     private fun isValidPassword(password: String): Boolean = password.length > 6
-    fun onLoginSelected() {
+    fun onLoginSelected(navController: NavHostController) {
         viewModelScope.launch {
             _isLoading.value = true
             val result = loginUseCase(email.value!!, password.value!!)
-            if(result) Log.i("Login", "Ok")
+            if(result){
+                navController.navigate("home")
+                Log.i("Login", "Ok")}
             else Log.i("login", "mal")
             _isLoading.value= false
         }
