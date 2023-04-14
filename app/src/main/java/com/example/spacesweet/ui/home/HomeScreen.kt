@@ -22,7 +22,7 @@ fun HomeScreen(viewModel: CountDownViewModel){
         TopAppBar(
             title = {
                 Text(
-                    text = "SpaceSweet",
+                    text = "Space Sweet",
                     textAlign = TextAlign.Center,
                     color = Color(0xFF6D46D7),
                     modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
@@ -55,24 +55,6 @@ fun HomeScreen(viewModel: CountDownViewModel){
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxSize()
             ) {
-
-                    viewModel.apply {
-                        Text(text = timerText.value, fontSize = 28.sp)
-                        startCountDownTimer()
-                        if(hasFinished.value) {
-                            AlertDialog(
-                                onDismissRequest = { hasFinished.value }, // Cuando el usuario presiona fuera del diálogo
-                                title = { Text("¡Lo has logrado!") },
-                                text = { Text("Has ganado un planeta, sigue así") },
-                                confirmButton = {
-                                    Button(onClick = { hasFinished.value = false; startCountDownTimer() }) {
-                                        Text("Seguir explorando")
-                                    }
-                                }
-                            )
-                        }
-                    }
-
                 Card(
                     shape = RoundedCornerShape(16.dp),
                     elevation = 4.dp,
@@ -83,11 +65,31 @@ fun HomeScreen(viewModel: CountDownViewModel){
                         verticalArrangement = Arrangement.Center,
                         modifier = Modifier.fillMaxWidth().padding(30.dp)
                     ) {
-                        Text(
-                            text = "Home",
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier.padding(bottom = 30.dp)
-                        )
+                        viewModel.apply {
+                            Text(text = timerText.value, fontSize = 28.sp)
+                            Button(onClick = { startCountDownTimer()},
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                Text(text = "Start")
+                            }
+                            if(hasFinished.value) {
+                                AlertDialog(
+                                    onDismissRequest = { hasFinished.value }, // Cuando el usuario presiona fuera del diálogo
+                                    title = { Text("¡Lo has logrado!") },
+                                    text = { Text("Has ganado un planeta, sigue así") },
+                                    confirmButton = {
+                                        Button(onClick = { hasFinished.value = false; startCountDownTimer() }) {
+                                            Text("Seguir explorando")
+                                        }
+                                    },
+                                    dismissButton = {
+                                        Button(onClick = { stopCountDownTimer() }) {
+                                            Text("Cancel")
+                                        }
+                                    }
+                                )
+                            }
+                        }
                     }
                 }
             }

@@ -13,7 +13,7 @@ class CountDownViewModel: ViewModel() {
 
     private val userInputHour = TimeUnit.HOURS.toMillis(0)
     private val userInputMinute = TimeUnit.MINUTES.toMillis(0)
-    private val userInputSecond = TimeUnit.SECONDS.toMillis(5)
+    private val userInputSecond = TimeUnit.SECONDS.toMillis(3)
 
     val initialTotalTimeInMillis = userInputHour + userInputMinute + userInputSecond
     var timeLeft = mutableStateOf(initialTotalTimeInMillis)
@@ -39,5 +39,10 @@ class CountDownViewModel: ViewModel() {
             }
         }.start()
     }
-
+    fun stopCountDownTimer() {
+        countDownTimer?.cancel()
+        hasFinished.value = false
+        timeLeft.value = initialTotalTimeInMillis
+        timerText.value = timeLeft.value.timeFormat()
+    }
 }
