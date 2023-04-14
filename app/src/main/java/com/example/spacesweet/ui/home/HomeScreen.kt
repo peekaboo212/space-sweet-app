@@ -4,9 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,11 +12,26 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-
+import androidx.compose.ui.unit.sp
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+
 @Composable
-fun HomeScreen(){
-    Scaffold {
+fun HomeScreen(viewModel: CountDownViewModel){
+
+    Scaffold (topBar = {
+        TopAppBar(
+            title = {
+                Text(
+                    text = "SpaceSweet",
+                    textAlign = TextAlign.Center,
+                    color = Color(0xFF6D46D7),
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                )
+            },
+            backgroundColor = Color(0xFFffffff)
+        )
+    }
+    ){
         Box(
             Modifier.fillMaxSize()
         ) {
@@ -42,6 +55,24 @@ fun HomeScreen(){
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxSize()
             ) {
+
+                    viewModel.apply {
+                        Text(text = timerText.value, fontSize = 28.sp)
+                        startCountDownTimer()
+                        if(hasFinished.value) {
+                            AlertDialog(
+                                onDismissRequest = { hasFinished.value }, // Cuando el usuario presiona fuera del diálogo
+                                title = { Text("¡Lo has logrado!") },
+                                text = { Text("Has ganado un planeta, sigue así") },
+                                confirmButton = {
+                                    Button(onClick = { hasFinished.value = false; startCountDownTimer() }) {
+                                        Text("Seguir explorando")
+                                    }
+                                }
+                            )
+                        }
+                    }
+
                 Card(
                     shape = RoundedCornerShape(16.dp),
                     elevation = 4.dp,

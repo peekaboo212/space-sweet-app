@@ -10,13 +10,17 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.spacesweet.ui.home.CountDownViewModel
 import com.example.spacesweet.ui.home.HomeScreen
 import com.example.spacesweet.ui.planets.PlanetsScreen
 import com.example.spacesweet.ui.profile.ProfileScreen
+import androidx.lifecycle.viewmodel.compose.viewModel as rememberViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun BottomNavigation() {
+    val countDownViewModel: CountDownViewModel = rememberViewModel()
+
     val navController = rememberNavController()
     Scaffold(
         bottomBar = {
@@ -61,7 +65,7 @@ fun BottomNavigation() {
         }
     ) {
         NavHost(navController = navController, startDestination = "home") {
-            composable("home") { HomeScreen() }
+            composable("home") { HomeScreen(countDownViewModel) }
             composable("planets") { PlanetsScreen()}
             composable("profile") { ProfileScreen() }
         }

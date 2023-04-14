@@ -48,7 +48,7 @@ class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase)
             _isLoading.value = true
             val result = loginUseCase(email.value!!, password.value!!)
             if(result){
-                navController.navigate("home")
+                navController.navigate("welcome")
                 Log.i("Login", "Ok")}
             else Log.i("login", "mal")
             _isLoading.value= false
