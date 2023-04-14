@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,7 +19,20 @@ import androidx.compose.ui.unit.dp
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(){
-    Scaffold {
+    Scaffold (topBar = {
+        TopAppBar(
+            title = {
+                Text(
+                    text = "SpaceSweet",
+                    textAlign = TextAlign.Center,
+                    color = Color(0xFF6D46D7),
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                )
+            },
+            backgroundColor = Color(0xFFffffff)
+        )
+    }
+    ){
         Box(
             Modifier.fillMaxSize()
         ) {
