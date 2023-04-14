@@ -6,6 +6,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -24,20 +25,20 @@ fun BottomNavigation() {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = {
-            BottomNavigation {
+            BottomNavigation(backgroundColor = Color(0xFFFFFFFF)) {
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentRoute = navBackStackEntry?.destination?.route
                 BottomNavigationItem(
-                    icon = { Icon(Icons.Default.Home, contentDescription = null) },
-                    label = { Text(text = "Home") },
+                    icon = { Icon(Icons.Default.Home, contentDescription = null, tint = Color(0xFF6D46D7)) },
+                    label = { Text(text = "Home", color = Color(0xFF6D46D7)) },
                     selected = currentRoute == "home",
                     onClick = {
                         navController.popBackStack(navController.graph.startDestinationId, false)
                     }
                 )
                 BottomNavigationItem(
-                    icon = { Icon(Icons.Default.LocationOn, contentDescription = null) },
-                    label = { Text("Planets") },
+                    icon = { Icon(Icons.Default.LocationOn, contentDescription = null, tint = Color(0xFF6D46D7)) },
+                    label = { Text("Planets", color = Color(0xFF6D46D7)) },
                     selected = currentRoute == "planets",
                     onClick = {
                         navController.navigate("planets") {
@@ -49,8 +50,8 @@ fun BottomNavigation() {
                     }
                 )
                 BottomNavigationItem(
-                    icon = { Icon(Icons.Default.Person, contentDescription = null) },
-                    label = { Text("Profile") },
+                    icon = { Icon(Icons.Default.Person, contentDescription = null, tint = Color(0xFF6D46D7)) },
+                    label = { Text("Profile", color = Color(0xFF6D46D7)) },
                     selected = currentRoute == "profile",
                     onClick = {
                         navController.navigate("profile") {
