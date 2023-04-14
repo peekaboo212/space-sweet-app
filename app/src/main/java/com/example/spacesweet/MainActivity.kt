@@ -11,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.spacesweet.ui.login.ui.LoginScreen
 import com.example.spacesweet.ui.login.ui.LoginViewModel
 import com.example.spacesweet.ui.onboarding.Onboard
@@ -28,6 +29,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val loginViewModel: LoginViewModel by viewModels()
+    private val countDownViewModel: CountDownViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,7 +74,7 @@ class MainActivity : ComponentActivity() {
                         composable("login") { LoginScreen(loginViewModel, navController) }
                         composable("register") {RegisterScreen(navController)}
                         composable("welcome") { WelcomeScreen(navController)}
-                        composable("home") { HomeScreen(CountDownViewModel()) }
+                        composable("home") { HomeScreen(countDownViewModel) }
                         composable("bottomNavigate"){ BottomNavigation()}
                     }
                 }
