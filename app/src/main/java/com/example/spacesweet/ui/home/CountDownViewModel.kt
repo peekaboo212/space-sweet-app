@@ -12,13 +12,15 @@ import java.util.concurrent.TimeUnit
 class CountDownViewModel: ViewModel() {
     private var countDownTimer: CountDownTimer? = null
 
-    val hour = mutableStateOf(0)
+    val userInputHours = mutableStateOf(0)
+    val userInputMinutes = mutableStateOf(0)
+    val userInputSeconds = mutableStateOf(0)
 
-    private var userInputHour = TimeUnit.HOURS.toMillis(hour.value.toLong() )
-    private val userInputMinute = TimeUnit.MINUTES.toMillis(0)
-    private val userInputSecond = TimeUnit.SECONDS.toMillis(3)
+    private var hours = TimeUnit.HOURS.toMillis(userInputHours.value.toLong() )
+    private var minutes = TimeUnit.MINUTES.toMillis(userInputMinutes.value.toLong())
+    private var seconds = TimeUnit.SECONDS.toMillis(userInputSeconds.value.toLong())
 
-    val initialTotalTimeInMillis = userInputHour + userInputMinute + userInputSecond
+    private val initialTotalTimeInMillis = hours + minutes + seconds
     var timeLeft = mutableStateOf(initialTotalTimeInMillis)
     val countDownInterval = 1000L // 1 seconds is the lowest
 
@@ -27,10 +29,12 @@ class CountDownViewModel: ViewModel() {
     val hasFinished = mutableStateOf(false)
 
     fun startCountDownTimer() = viewModelScope.launch {
-        userInputHour = TimeUnit.HOURS.toMillis(hour.value.toLong()) // Actualiza el valor de userInputHour
-        val initialTotalTimeInMillis = userInputHour + userInputMinute + userInputSecond // Calcula el tiempo total inicial con el valor de hora actualizado
-        timeLeft.value = initialTotalTimeInMillis // Actualiza el valor de timeLeft con el tiempo total inicial actualizado
-        timerText.value = timeLeft.value.timeFormat() // Actualiza el texto del temporizador con el nuevo valor de timeLeft
+        hours = TimeUnit.HOURS.toMillis(userInputHours.value.toLong())
+        minutes = TimeUnit.MINUTES.toMillis(userInputMinutes.value.toLong())
+        seconds = TimeUnit.SECONDS.toMillis(userInputSeconds.value.toLong())
+        val initialTotalTimeInMillis = hours + minutes + seconds
+        timeLeft.value = initialTotalTimeInMillis
+        timerText.value = timeLeft.value.timeFormat()
 
         countDownTimer = object : CountDownTimer(timeLeft.value, countDownInterval) {
             override fun onTick(currentTimeLeft: Long) {
@@ -40,7 +44,7 @@ class CountDownViewModel: ViewModel() {
 
 
             override fun onFinish() {
-                Log.e("hour", userInputHour.toString())
+                Log.e("hour", hours.toString())
                 timerText.value = initialTotalTimeInMillis.timeFormat()
                 hasFinished.value = true
                 timerText.value = initialTotalTimeInMillis.timeFormat()
