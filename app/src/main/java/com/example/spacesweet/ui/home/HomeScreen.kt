@@ -1,10 +1,14 @@
 package com.example.spacesweet.ui.home
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,6 +21,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun HomeScreen(viewModel: CountDownViewModel){
+    var hour = 0
 
     Scaffold (topBar = {
         TopAppBar(
@@ -65,9 +70,26 @@ fun HomeScreen(viewModel: CountDownViewModel){
                         verticalArrangement = Arrangement.Center,
                         modifier = Modifier.fillMaxWidth().padding(30.dp)
                     ) {
+                        pTextField(
+                            value = hour,
+                            onValueChange = { },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 10.dp)
+                                .background(Color.White)
+                                .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(0.dp, 0.dp, 0.dp, 1.dp)),
+                            colors = TextFieldDefaults.textFieldColors(
+                                textColor = Color.Black,
+                                backgroundColor = Color.White,
+                                focusedIndicatorColor = Color.Transparent,
+                                unfocusedIndicatorColor = Color.Transparent
+                            )
+                        )
                         viewModel.apply {
                             Text(text = timerText.value, fontSize = 28.sp)
-                            Button(onClick = { startCountDownTimer()},
+                            Button(onClick = {
+                                viewModel.hour.value = hour // Establece el valor de hour en 2
+                                startCountDownTimer()},
                                 modifier = Modifier.fillMaxWidth()
                             ) {
                                 Text(text = "Start")
@@ -78,13 +100,8 @@ fun HomeScreen(viewModel: CountDownViewModel){
                                     title = { Text("¡Lo has logrado!") },
                                     text = { Text("Has ganado un planeta, sigue así") },
                                     confirmButton = {
-                                        Button(onClick = { hasFinished.value = false; startCountDownTimer() }) {
-                                            Text("Seguir explorando")
-                                        }
-                                    },
-                                    dismissButton = {
                                         Button(onClick = { stopCountDownTimer() }) {
-                                            Text("Cancel")
+                                            Text("Seguir explorando")
                                         }
                                     }
                                 )
@@ -95,4 +112,23 @@ fun HomeScreen(viewModel: CountDownViewModel){
             }
         }
     }
+}
+
+@Composable
+fun pruebita() {
+    TextField(
+        value = hour,
+        onValueChange = { },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 10.dp)
+            .background(Color.White)
+            .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(0.dp, 0.dp, 0.dp, 1.dp)),
+        colors = TextFieldDefaults.textFieldColors(
+            textColor = Color.Black,
+            backgroundColor = Color.White,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent
+        )
+    )
 }
