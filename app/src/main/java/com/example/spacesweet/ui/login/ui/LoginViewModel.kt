@@ -48,14 +48,21 @@ class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase)
         Log.i("Session", preferences.getSession().toString())
         viewModelScope.launch {
             _isLoading.value = true
-            val result = loginUseCase(email.value!!, password.value!!)
-            if(!result){
-                preferences.saveSession(true)
-                navController.navigate("welcome")
-                Log.i("Login", "Ok")}
+            val result = loginUseCase(email.value!!, password.value!!).body()
 
-            else Log.i("login", "mal")
+            if (result != null) {
+                if (result.status) {
+                    preferences.saveSession(true)
+                    preferences.saveName(result.username!!)
+                    preferences.saveEmail(result.email!!)
+                    navController.navigate("welcome")
+                    Log.i("Login", "Ok")
+                    Log.i("Nombre", result.username!!)
+                } else {
+                    Log.i("login", result?.status.toString())
+                }
+            }
             _isLoading.value= false
-        }
     }
+}
 }

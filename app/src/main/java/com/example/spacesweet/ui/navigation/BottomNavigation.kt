@@ -72,7 +72,7 @@ fun BottomNavigation(preferences: Preferences) {
         NavHost(navController = navController, startDestination = "home") {
             composable("home") { HomeScreen(countDownViewModel, preferences) }
             composable("planets") { PlanetsScreen(preferences)}
-            composable("profile") { ProfileScreen() }
+            composable("profile") { ProfileScreen(preferences) }
         }
         
     }

@@ -24,10 +24,11 @@ import coil.compose.rememberAsyncImagePainter
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import com.example.spacesweet.R
+import com.example.spacesweet.data.shared_preferencences.Preferences
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun ProfileScreen(){
+fun ProfileScreen(preferences: Preferences){
     Scaffold (
 
      ){
@@ -54,7 +55,7 @@ fun ProfileScreen(){
                             modifier = Modifier.size(128.dp).padding(bottom = 30.dp)
                         )
                         Text(
-                            text = "Username: Sofía Chavarría",
+                            text = "Username: " + preferences.getName(),
                             textAlign = TextAlign.Center,
                             modifier = Modifier.padding(bottom = 10.dp)
                         )
@@ -69,7 +70,7 @@ fun ProfileScreen(){
                         modifier = Modifier.fillMaxWidth().padding(30.dp)
                     ) {
                         Text(
-                            text = "Email: sofia@example.com",
+                            text = "Email: " + preferences.getEmail(),
                             modifier = Modifier.padding(bottom = 10.dp)
                         )
                         Text(
