@@ -1,6 +1,9 @@
 package com.example.spacesweet.ui.navigation
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
+import android.media.MediaPlayer
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -11,6 +14,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.spacesweet.R
+import com.example.spacesweet.data.shared_preferencences.Preferences
 import com.example.spacesweet.ui.home.CountDownViewModel
 import com.example.spacesweet.ui.home.HomeScreen
 import com.example.spacesweet.ui.planets.PlanetsScreen
@@ -19,9 +24,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel as rememberViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun BottomNavigation() {
+fun BottomNavigation(preferences: Preferences) {
     val countDownViewModel: CountDownViewModel = rememberViewModel()
-
     val navController = rememberNavController()
     Scaffold(
         bottomBar = {
@@ -66,9 +70,13 @@ fun BottomNavigation() {
         }
     ) {
         NavHost(navController = navController, startDestination = "home") {
-            composable("home") { HomeScreen(countDownViewModel) }
-            composable("planets") { PlanetsScreen()}
+            composable("home") { HomeScreen(countDownViewModel, preferences) }
+            composable("planets") { PlanetsScreen(preferences)}
             composable("profile") { ProfileScreen() }
         }
+        
     }
 }
+
+
+

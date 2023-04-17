@@ -13,19 +13,16 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.lifecycle.viewmodel.compose.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -33,15 +30,20 @@ import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
+import com.example.spacesweet.MediaPlayerViewModel
 import com.example.spacesweet.R
+import com.example.spacesweet.data.shared_preferencences.Preferences
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 
 @Composable
-fun HomeScreen(viewModel: CountDownViewModel){
+fun HomeScreen(viewModel: CountDownViewModel, preferences: Preferences){
     var userInputHours by remember { mutableStateOf(0) }
     var userInputMinutes by remember { mutableStateOf(0) }
     var userInputSeconds by remember { mutableStateOf(0) }
+
+    val context = LocalContext.current
+
 
     Scaffold (
     ){
@@ -99,7 +101,7 @@ fun HomeScreen(viewModel: CountDownViewModel){
                                 viewModel.userInputHours.value = userInputHours
                                 viewModel.userInputMinutes.value = userInputMinutes
                                 viewModel.userInputSeconds.value = userInputSeconds
-                                startCountDownTimer()},
+                                startCountDownTimer(preferences)},
                                 modifier = Modifier.fillMaxWidth()
                             ) {
                                 Text(text = "Start")

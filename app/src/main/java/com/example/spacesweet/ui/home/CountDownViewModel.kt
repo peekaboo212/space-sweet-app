@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.spacesweet.data.shared_preferencences.Preferences
 import com.example.spacesweet.ui.home.TimeFormat.timeFormat
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
@@ -28,7 +29,7 @@ class CountDownViewModel: ViewModel() {
 
     val hasFinished = mutableStateOf(false)
 
-    fun startCountDownTimer() = viewModelScope.launch {
+    fun startCountDownTimer(preferences: Preferences) = viewModelScope.launch {
         hours = TimeUnit.HOURS.toMillis(userInputHours.value.toLong())
         minutes = TimeUnit.MINUTES.toMillis(userInputMinutes.value.toLong())
         seconds = TimeUnit.SECONDS.toMillis(userInputSeconds.value.toLong())
@@ -44,6 +45,7 @@ class CountDownViewModel: ViewModel() {
 
 
             override fun onFinish() {
+                preferences.saveNumberOfPlanets()
                 Log.e("hour", hours.toString())
                 timerText.value = initialTotalTimeInMillis.timeFormat()
                 hasFinished.value = true
