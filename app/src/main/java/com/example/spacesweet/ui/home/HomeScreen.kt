@@ -43,21 +43,7 @@ fun HomeScreen(viewModel: CountDownViewModel){
     var userInputMinutes by remember { mutableStateOf(0) }
     var userInputSeconds by remember { mutableStateOf(0) }
 
-    Scaffold (topBar = {
-        TopAppBar(
-            title = {
-                Text(
-                    text = "Space Sweet",
-                    textAlign = TextAlign.Center,
-                    color = Color(0xFF6D46D7),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp),
-                )
-            },
-            backgroundColor = Color(0xFFffffff)
-        )
-    }
+    Scaffold (
     ){
 
         Box(
@@ -109,6 +95,7 @@ fun HomeScreen(viewModel: CountDownViewModel){
                         viewModel.apply {
                             Text(text = timerText.value, fontSize = 28.sp)
                             Button(onClick = {
+                                stopCountDownTimer()
                                 viewModel.userInputHours.value = userInputHours
                                 viewModel.userInputMinutes.value = userInputMinutes
                                 viewModel.userInputSeconds.value = userInputSeconds

@@ -1,5 +1,7 @@
 package com.example.spacesweet
 
+import android.content.Context
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -34,13 +36,14 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            playAudio(this)
             SpaceSweetTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
                     val navController = rememberNavController()
-                    NavHost(navController = navController, startDestination = "home") {
+                    NavHost(navController = navController, startDestination = "welcome") {
                         composable("onboarding1") {
                             Onboard(
                                 navController,
@@ -80,6 +83,13 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
+
+    }
+    @Composable
+    fun playAudio(context: Context) {
+        val mediaPlayer: MediaPlayer = MediaPlayer.create(context, R.raw.background_music)
+        mediaPlayer.start()
     }
 }
 
