@@ -101,14 +101,16 @@ val imageList = listOf(
     ImageInfo(2, "Pantan", R.drawable.planeta_pantanosofin),
     ImageInfo(3, "Vyper", R.drawable.planeta_venenoso),
     ImageInfo(4, "Roboto", R.drawable.planetarobotfin),
-    ImageInfo(5, "Mistery", R.drawable.planetamisterioso)
+    ImageInfo(5, "Mistery", R.drawable.planetamisterioso),
+    ImageInfo(6, "Catrrent", R.drawable.cat_planet),
+    ImageInfo(7, "Norboring", R.drawable.earth),
+    ImageInfo(8, "Rainbow planet", R.drawable.rainbow_planet)
 )
 
 @Composable
 fun ImageList(images: List<ImageInfo>, count: Int) {
 
     if (count > images.size) {
-        // Si count es mayor que el tamaño de la lista, se muestra la lista completa.
         ImageList(images, images.size)
         return
     }
@@ -153,3 +155,5 @@ fun SpaceBackground() {
         modifier = Modifier.fillMaxSize()
     )
 }
+
+

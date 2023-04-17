@@ -35,16 +35,24 @@ class MainActivity : ComponentActivity() {
     private val loginViewModel: LoginViewModel by viewModels()
     private val countDownViewModel: CountDownViewModel by viewModels()
     private val mediaPlayerViewModel: MediaPlayerViewModel by viewModels()
+    var startDestination: String = ""
 
     companion object {
         lateinit var preferences: Preferences
     }
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         preferences = Preferences(applicationContext)
+
+        startDestination = if(preferences.getSession()) {
+            "welcome"
+        } else {
+            "onboarding1"
+        }
 
         setContent {
             DisposableEffect(Unit) {
@@ -71,7 +79,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     val navController = rememberNavController()
-                    NavHost(navController = navController, startDestination = "welcome") {
+
+                    NavHost(navController = navController, startDestination = startDestination) {
                         composable("onboarding1") {
                             Onboard(
                                 navController,
@@ -102,7 +111,7 @@ class MainActivity : ComponentActivity() {
                                 buttonTitle = "Get Start",
                             )
                         }
-                        composable("login") { LoginScreen(loginViewModel, navController) }
+                        composable("login") { LoginScreen(loginViewModel, navController, preferences) }
                         composable("register") {RegisterScreen(navController)}
                         composable("welcome") { WelcomeScreen(navController)}
                         composable("home") { HomeScreen(countDownViewModel, preferences) }

@@ -54,7 +54,7 @@ fun ProfileScreen(){
                             modifier = Modifier.size(128.dp).padding(bottom = 30.dp)
                         )
                         Text(
-                            text = "Username",
+                            text = "Username: Sofía Chavarría",
                             textAlign = TextAlign.Center,
                             modifier = Modifier.padding(bottom = 10.dp)
                         )
@@ -69,19 +69,11 @@ fun ProfileScreen(){
                         modifier = Modifier.fillMaxWidth().padding(30.dp)
                     ) {
                         Text(
-                            text = "Email:",
+                            text = "Email: sofia@example.com",
                             modifier = Modifier.padding(bottom = 10.dp)
                         )
                         Text(
-                            text = "Password:",
-                            modifier = Modifier.padding(bottom = 10.dp)
-                        )
-                        Text(
-                            text = "Objetivo diario:",
-                            modifier = Modifier.padding(bottom = 10.dp)
-                        )
-                        Text(
-                            text = "Stars:",
+                            text = "Objetivo diario: Sin establecer",
                             modifier = Modifier.padding(bottom = 10.dp)
                         )
                     }

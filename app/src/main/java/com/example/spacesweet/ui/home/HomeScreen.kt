@@ -33,6 +33,7 @@ import coil.decode.ImageDecoderDecoder
 import com.example.spacesweet.MediaPlayerViewModel
 import com.example.spacesweet.R
 import com.example.spacesweet.data.shared_preferencences.Preferences
+import com.example.spacesweet.ui.planets.ImageList
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 
@@ -57,7 +58,7 @@ fun HomeScreen(viewModel: CountDownViewModel, preferences: Preferences){
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxSize()
             ) {
-                Astronaut()
+                Astronaut(astronauts, preferences.getAstronauts())
                 Card(
                     shape = RoundedCornerShape(16.dp),
                     elevation = 4.dp,
@@ -165,7 +166,7 @@ fun NumericInputField(
 }
 
 @Composable
-fun Astronaut() {
+fun Astronaut(astronauts: List<Int>, count: Int) {
     val imageLoader = ImageLoader.Builder(LocalContext.current)
         .components {
             if (SDK_INT >= 28) {
@@ -176,8 +177,14 @@ fun Astronaut() {
         }
         .build()
 
+    if (count > astronauts.size) {
+        Astronaut(astronauts, count)
+        return
+    }
+
+
     Image(
-        painter = rememberAsyncImagePainter(R.drawable.normal_astronaut, imageLoader),
+        painter = rememberAsyncImagePainter(astronauts[count], imageLoader),
         contentDescription = null,
         modifier = Modifier
             .size(200.dp)
@@ -203,3 +210,12 @@ fun SpaceBackground() {
         modifier = Modifier.fillMaxSize()
     )
 }
+
+val astronauts = listOf(
+    R.drawable.normal_astronaut,
+    R.drawable.blue_astronaut,
+    R.drawable.green_astronaut,
+    R.drawable.rainbow_astronaut,
+    R.drawable.white_astronaut,
+    R.drawable.yellow_astronaut,
+    R.drawable.red_astronaut)

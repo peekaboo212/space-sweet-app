@@ -30,10 +30,11 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.navigation.NavHostController
+import com.example.spacesweet.data.shared_preferencences.Preferences
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun LoginScreen(viewModel: LoginViewModel, navController: NavHostController) {
+fun LoginScreen(viewModel: LoginViewModel, navController: NavHostController, preferences: Preferences) {
 
     Scaffold {
         Box(
@@ -69,7 +70,7 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavHostController) {
                         verticalArrangement = Arrangement.Center,
                         modifier = Modifier.fillMaxWidth().padding(3.dp)
                     ) {
-                        Login(viewModel, navController)
+                        Login(viewModel, navController, preferences)
                     }
                 }
             }
@@ -79,7 +80,7 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavHostController) {
 
 
 @Composable
-fun Login(viewModel: LoginViewModel, navController: NavHostController) {
+fun Login(viewModel: LoginViewModel, navController: NavHostController, preferences: Preferences) {
     val email: String by viewModel.email.observeAsState(initial = "")
     val password: String by viewModel.password.observeAsState(initial = "")
     val loginEnable: Boolean by viewModel.valid.observeAsState(initial = false)
@@ -103,7 +104,7 @@ fun Login(viewModel: LoginViewModel, navController: NavHostController) {
         PasswordField(password) { viewModel.onLoginChanged(email, it) }
         LoginButton(loginEnable) {
             coroutineScope.launch {
-                viewModel.onLoginSelected(navController)
+                viewModel.onLoginSelected(navController, preferences)
             }
         }
         RegisterButton(Modifier.align(Alignment.End), navController)

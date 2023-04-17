@@ -46,6 +46,7 @@ class CountDownViewModel: ViewModel() {
 
             override fun onFinish() {
                 preferences.saveNumberOfPlanets()
+                preferences.saveAstronauts()
                 Log.e("hour", hours.toString())
                 timerText.value = initialTotalTimeInMillis.timeFormat()
                 hasFinished.value = true
