@@ -1,8 +1,10 @@
 package com.example.spacesweet.ui.home
 
 import android.annotation.SuppressLint
-import android.util.Log
+import android.graphics.Insets.add
+import android.os.Build.VERSION.SDK_INT
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -24,6 +26,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import coil.ImageLoader
+import coil.compose.rememberAsyncImagePainter
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
+import com.example.spacesweet.R
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 
@@ -49,29 +59,17 @@ fun HomeScreen(viewModel: CountDownViewModel){
         )
     }
     ){
+
         Box(
-            Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize()
         ) {
-            Box(
-                Modifier
-                    .background(
-                        Brush.verticalGradient(
-                            colors = listOf(
-                                Color(0xFF242424),
-                                Color(0xFF2B2A6D),
-                                Color(0xFF000000)
-                            ),
-                            startY = 0f,
-                            endY = Float.POSITIVE_INFINITY
-                        )
-                    )
-                    .fillMaxSize()
-            )
+            SpaceBackground()
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxSize()
             ) {
+                Astronaut()
                 Card(
                     shape = RoundedCornerShape(16.dp),
                     elevation = 4.dp,
@@ -174,5 +172,45 @@ fun NumericInputField(
             unfocusedIndicatorColor = Color.Transparent
         ),
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
+    )
+}
+
+@Composable
+fun Astronaut() {
+    val imageLoader = ImageLoader.Builder(LocalContext.current)
+        .components {
+            if (SDK_INT >= 28) {
+                add(ImageDecoderDecoder.Factory())
+            } else {
+                add(GifDecoder.Factory())
+            }
+        }
+        .build()
+
+    Image(
+        painter = rememberAsyncImagePainter(R.drawable.normal_astronaut, imageLoader),
+        contentDescription = null,
+        modifier = Modifier
+            .size(200.dp)
+            .padding(bottom = 10.dp)
+    )
+}
+
+@Composable
+fun SpaceBackground() {
+    val imageLoader = ImageLoader.Builder(LocalContext.current)
+        .components {
+            if (SDK_INT >= 28) {
+                add(ImageDecoderDecoder.Factory())
+            } else {
+                add(GifDecoder.Factory())
+            }
+        }
+        .build()
+
+    Image(
+        painter = rememberAsyncImagePainter(R.drawable.space_background, imageLoader),
+        contentDescription = null,
+        modifier = Modifier.fillMaxSize()
     )
 }
