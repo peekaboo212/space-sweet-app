@@ -22,6 +22,7 @@ import com.example.spacesweet.ui.welcome.WelcomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContent {
             SpaceSweetTheme {
