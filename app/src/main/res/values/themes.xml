@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.SpaceSweet" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/purple_700</item>
+    </style>
+
+
+        <style name="space" parent="">
+            <item name="android:windowBackground">@drawable/space</item>
+        </style>
+
+
+</resources>
