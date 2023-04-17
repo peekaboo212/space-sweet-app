@@ -24,6 +24,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -149,7 +150,7 @@ fun PasswordField(password: String, onTextFieldChanged: (String) -> Unit) {
             .background(Color.White)
             .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(0.dp, 0.dp, 0.dp, 1.dp)),
         leadingIcon = {
-            Icon(imageVector = Icons.Default.Email, contentDescription = "Email Icon",
+            Icon(imageVector = Icons.Default.Lock, contentDescription = "Password Icon",
                 tint = Color.Black)
         },
         placeholder = { Text(text = "Contraseña") },

@@ -10,6 +10,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -162,7 +163,7 @@ fun PasswordField(password: String) {
             .background(Color.White)
             .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(0.dp, 0.dp, 0.dp, 1.dp)),
         leadingIcon = {
-            Icon(imageVector = Icons.Default.Email, contentDescription = "Email Icon",
+            Icon(imageVector = Icons.Default.Lock, contentDescription = "Password Icon",
                 tint = Color.Black)
         },
         placeholder = { Text(text = "Contraseña") },
