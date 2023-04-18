@@ -16,6 +16,7 @@ class CountDownViewModel: ViewModel() {
     val userInputHours = mutableStateOf(0)
     val userInputMinutes = mutableStateOf(0)
     val userInputSeconds = mutableStateOf(0)
+    val isActivate = mutableStateOf(false)
 
     private var hours = TimeUnit.HOURS.toMillis(userInputHours.value.toLong() )
     private var minutes = TimeUnit.MINUTES.toMillis(userInputMinutes.value.toLong())
@@ -36,6 +37,7 @@ class CountDownViewModel: ViewModel() {
         val initialTotalTimeInMillis = hours + minutes + seconds
         timeLeft.value = initialTotalTimeInMillis
         timerText.value = timeLeft.value.timeFormat()
+        isActivate.value = false
 
         countDownTimer = object : CountDownTimer(timeLeft.value, countDownInterval) {
             override fun onTick(currentTimeLeft: Long) {
@@ -45,6 +47,7 @@ class CountDownViewModel: ViewModel() {
 
 
             override fun onFinish() {
+                isActivate.value = true
                 preferences.saveNumberOfPlanets()
                 preferences.saveAstronauts()
                 Log.e("hour", hours.toString())
@@ -58,6 +61,7 @@ class CountDownViewModel: ViewModel() {
     }
     fun stopCountDownTimer() {
         countDownTimer?.cancel()
+        isActivate.value = true
         hasFinished.value = false
         timeLeft.value = initialTotalTimeInMillis
         timerText.value = timeLeft.value.timeFormat()

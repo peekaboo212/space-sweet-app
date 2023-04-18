@@ -53,49 +53,67 @@ fun HomeScreen(viewModel: CountDownViewModel, preferences: Preferences){
             modifier = Modifier.fillMaxSize()
         ) {
             SpaceBackground()
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxSize()
-            ) {
-                Astronaut(astronauts, preferences.getAstronauts())
-                Card(
-                    shape = RoundedCornerShape(16.dp),
-                    elevation = 4.dp,
-                    modifier = Modifier.padding(45.dp)
-                ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(30.dp)
-                    ) {
-                        NumericInputField(
-                            value = userInputHours,
-                            maxValue = 24,
-                            placeholderText = "Horas"
-                        ) { newHourValue ->
-                            userInputHours = newHourValue
-                        }
 
-                        NumericInputField(
-                            value = userInputMinutes,
-                            maxValue = 59,
-                            placeholderText = "Minutos"
-                        ) { newMinuteValue ->
-                            userInputMinutes = newMinuteValue
-                        }
-
-                        NumericInputField(
-                            value = userInputSeconds,
-                            maxValue = 59,
-                            placeholderText = "Segundos"
-                        ) { newSecondValue ->
-                            userInputSeconds = newSecondValue
-                        }
 
                         viewModel.apply {
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center,
+                                modifier = Modifier.fillMaxSize()
+                            ) {
+                                Astronaut(astronauts, preferences.getAstronauts())
+                                Card(
+                                    shape = RoundedCornerShape(16.dp),
+                                    elevation = 4.dp,
+                                    modifier = Modifier.padding(45.dp)
+                                ) {
+                                    Column(
+                                        horizontalAlignment = Alignment.CenterHorizontally,
+                                        verticalArrangement = Arrangement.Center,
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(30.dp)
+                                    ) {
+                                        NumericInputField(
+                                            value = userInputHours,
+                                            maxValue = 24,
+                                            placeholderText = "Horas"
+                                        ) { newHourValue ->
+                                            userInputHours = newHourValue;
+
+                                                isActivate.value = true
+
+                                        }
+
+                                        NumericInputField(
+                                            value = userInputMinutes,
+                                            maxValue = 59,
+                                            placeholderText = "Minutos"
+                                        ) { newMinuteValue ->
+                                            isActivate.value = true;
+                                            userInputMinutes = newMinuteValue;
+
+
+
+                                        }
+
+                                        NumericInputField(
+                                            value = userInputSeconds,
+                                            maxValue = 59,
+                                            placeholderText = "Segundos"
+                                        ) { newSecondValue ->
+                                            userInputSeconds = newSecondValue;
+
+                                                isActivate.value = true
+
+                                        }
+                                        if(isActivate.value) {
+                                            isActivate.value =
+                                                !(userInputSeconds == 0 && userInputMinutes == 0 && userInputHours == 0)
+                                        } else {
+
+                                        }
+
                             Text(text = timerText.value, fontSize = 28.sp)
                             Button(onClick = {
                                 stopCountDownTimer()
@@ -103,7 +121,8 @@ fun HomeScreen(viewModel: CountDownViewModel, preferences: Preferences){
                                 viewModel.userInputMinutes.value = userInputMinutes
                                 viewModel.userInputSeconds.value = userInputSeconds
                                 startCountDownTimer(preferences)},
-                                modifier = Modifier.fillMaxWidth()
+                                modifier = Modifier.fillMaxWidth(),
+                                enabled = isActivate.value
                             ) {
                                 Text(text = "Start")
                             }
@@ -135,7 +154,7 @@ fun NumericInputField(
     onValueChange: (Int) -> Unit
 ) {
     TextField(
-        value = if (value == 0) "" else value.toString(),
+        value = if (value == -1) "" else value.toString(),
         onValueChange = { newValue ->
             val newValueInt = newValue.toIntOrNull()
             if (newValueInt != null && newValueInt <= maxValue) {

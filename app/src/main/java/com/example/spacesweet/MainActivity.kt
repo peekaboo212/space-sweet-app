@@ -116,7 +116,7 @@ class MainActivity : ComponentActivity() {
                         composable("register") {RegisterScreen(navController)}
                         composable("welcome") { WelcomeScreen(navController)}
                         composable("home") { HomeScreen(countDownViewModel, preferences) }
-                        composable("bottomNavigate"){ BottomNavigation(preferences)}
+                        composable("bottomNavigate"){ BottomNavigation(preferences, navController)}
                     }
                 }
             }

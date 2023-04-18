@@ -10,6 +10,7 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -24,7 +25,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel as rememberViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun BottomNavigation(preferences: Preferences) {
+fun BottomNavigation(preferences: Preferences, prueba : NavHostController) {
     val countDownViewModel: CountDownViewModel = rememberViewModel()
     val navController = rememberNavController()
     Scaffold(
@@ -72,7 +73,7 @@ fun BottomNavigation(preferences: Preferences) {
         NavHost(navController = navController, startDestination = "home") {
             composable("home") { HomeScreen(countDownViewModel, preferences) }
             composable("planets") { PlanetsScreen(preferences)}
-            composable("profile") { ProfileScreen(preferences) }
+            composable("profile") { ProfileScreen(preferences, prueba) }
         }
         
     }

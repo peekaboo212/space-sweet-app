@@ -6,10 +6,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,6 +16,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.GifDecoder
@@ -28,7 +26,7 @@ import com.example.spacesweet.data.shared_preferencences.Preferences
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun ProfileScreen(preferences: Preferences){
+fun ProfileScreen(preferences: Preferences, navController: NavHostController){
     Scaffold (
 
      ){
@@ -47,12 +45,16 @@ fun ProfileScreen(preferences: Preferences){
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center,
-                        modifier = Modifier.fillMaxWidth().padding(30.dp)
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(30.dp)
                     ) {
                         Image(
                             painter = painterResource(id = R.drawable.profile),
                             contentDescription = "My Image",
-                            modifier = Modifier.size(128.dp).padding(bottom = 30.dp)
+                            modifier = Modifier
+                                .size(128.dp)
+                                .padding(bottom = 30.dp)
                         )
                         Text(
                             text = "Username: " + preferences.getName(),
@@ -67,7 +69,9 @@ fun ProfileScreen(preferences: Preferences){
                     modifier = Modifier.padding(horizontal = 45.dp)
                 ) {
                     Column(
-                        modifier = Modifier.fillMaxWidth().padding(30.dp)
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(30.dp)
                     ) {
                         Text(
                             text = "Email: " + preferences.getEmail(),
@@ -77,6 +81,16 @@ fun ProfileScreen(preferences: Preferences){
                             text = "Objetivo diario: Sin establecer",
                             modifier = Modifier.padding(bottom = 10.dp)
                         )
+                        Button(onClick = { navController.navigate("login"); preferences.saveSession(false); },
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = ButtonDefaults.buttonColors(
+                                backgroundColor = Color.Red,
+                                contentColor = Color.White
+
+                            )
+                        ) {
+                            Text(text = "Cerrar sesión",)
+                        }
                     }
                 }
             }
